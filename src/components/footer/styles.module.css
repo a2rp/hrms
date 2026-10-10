@@ -1,0 +1,77 @@
+﻿.footer {
+    display: grid;
+    gap: 17px;
+    padding: 22px clamp(20px, 4vw, 48px) 18px;
+    border-top: 1px solid var(--color-border);
+    background: #fffdf9;
+
+    .identity {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+
+        img { width: 27px; height: 27px; object-fit: contain; }
+        > span { display: grid; gap: 1px; }
+        strong { color: #322a32; font-size: 14px; font-weight: 750; }
+        small { color: var(--color-muted); font-size: 13px; }
+    }
+
+    .bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding-top: 13px;
+        border-top: 1px solid #f0ebe5;
+
+        p { color: var(--color-muted); font-size: 13px; }
+        p a { display: inline-block; padding: 0 3px; color: #554850; }
+        p a:hover { color: var(--color-primary); box-shadow: inset 0 -1px var(--color-primary); }
+    }
+
+    .social {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 6px;
+
+        a {
+            display: grid;
+            width: 37px;
+            height: 37px;
+            place-items: center;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            color: #756c74;
+            background: transparent;
+            font-size: 16px;
+
+            &:hover,
+            &:focus-visible {
+                border-color: #e4d9df;
+                color: var(--color-primary);
+                background: #f5eef2;
+                box-shadow: 0 3px 9px rgb(49 36 44 / 7%);
+            }
+        }
+    }
+
+    .tooltip {
+        z-index: 100;
+        max-width: 260px;
+        padding: 9px 12px;
+        border: 1px solid rgb(255 255 255 / 14%);
+        border-radius: 10px;
+        color: white;
+        background: #322b32;
+        box-shadow: 0 8px 22px rgb(30 23 29 / 18%);
+        font-size: 13px;
+        white-space: pre-line;
+    }
+
+    @media (max-width: 48rem) {
+        padding: 19px 16px 14px;
+        .bottom { align-items: flex-start; flex-direction: column; gap: 8px; }
+        .social { justify-content: flex-start; flex-wrap: wrap; margin-left: -7px; }
+    }
+}
