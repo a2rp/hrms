@@ -1,0 +1,31 @@
+﻿.setup {
+    width: min(100% - 40px, 760px);
+    min-height: 100vh;
+    display: grid;
+    align-content: center;
+    gap: 18px;
+    margin-inline: auto;
+}
+
+.brand {
+    color: var(--color-primary);
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.brand span {
+    color: var(--color-accent);
+}
+
+.setup h1 {
+    max-width: 620px;
+    font-size: clamp(36px, 7vw, 62px);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 1.04;
+}
+
+.copy {
+    color: var(--color-muted);
+    font-size: 18px;
+}
