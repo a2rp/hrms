@@ -1,5 +1,5 @@
 ﻿import { NavLink } from "react-router-dom";
-import { FiActivity, FiCalendar, FiGrid, FiUsers, FiWallet } from "react-icons/fi";
+import { FiActivity, FiCalendar, FiGrid, FiUsers, FiCreditCard } from "react-icons/fi";
 import useApp from "../../context/useApp.js";
 import styles from "./styles.module.css";
 
@@ -8,7 +8,7 @@ const links = [
     { to: "/people", label: "People", icon: FiUsers },
     { to: "/attendance", label: "Attendance", icon: FiActivity },
     { to: "/leave", label: "Time off", icon: FiCalendar },
-    { to: "/payroll", label: "Payroll", icon: FiWallet },
+    { to: "/payroll", label: "Payroll", icon: FiCreditCard },
 ];
 
 const Sidebar = ({ open, onClose }) => {
@@ -48,3 +48,4 @@ const Sidebar = ({ open, onClose }) => {
 };
 
 export default Sidebar;
+
