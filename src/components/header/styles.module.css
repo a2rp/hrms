@@ -83,7 +83,7 @@
             color: #8b8188;
             background: #faf8f9;
             font-family: inherit;
-            font-size: 12px;
+            font-size: 13px;
         }
     }
 
@@ -154,3 +154,4 @@
         .repository { display: none; }
     }
 }
+
