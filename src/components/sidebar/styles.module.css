@@ -41,7 +41,7 @@
             span {
                 padding-top: 4px;
                 color: var(--color-muted);
-                font-size: 12px;
+                font-size: 13px;
                 font-weight: 550;
                 letter-spacing: .1px;
             }
@@ -223,3 +223,4 @@
         &.scrimVisible { opacity: 1; pointer-events: auto; }
     }
 }
+
