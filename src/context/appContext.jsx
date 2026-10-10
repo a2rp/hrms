@@ -43,9 +43,9 @@ export const AppProvider = ({ children }) => {
             name: values.name.trim(),
             email,
             salary: Number(values.salary),
+            initials: values.name.trim().split(/\s+/).slice(0, 2).map((part) => part[0]?.toUpperCase()).join(""),
             status: values.status || "Active",
             leave: { annual: 18, sick: 8, personal: 3 },
-            initials: values.name.trim().split(/\s+/).slice(0, 2).map((part) => part[0]?.toUpperCase()).join(""),
             color: ["lilac", "rose", "gold", "blue", "mint", "peach", "plum", "teal", "coral"][employees.length % 9],
         };
         setEmployees((current) => [employee, ...current]);
@@ -65,6 +65,7 @@ export const AppProvider = ({ children }) => {
             name: values.name.trim(),
             email,
             salary: Number(values.salary),
+            initials: values.name.trim().split(/\s+/).slice(0, 2).map((part) => part[0]?.toUpperCase()).join(""),
         } : employee));
         showToast(`${values.name.trim()}’s profile was updated.`);
         return { ok: true };
@@ -73,7 +74,7 @@ export const AppProvider = ({ children }) => {
     const removeEmployee = (id) => {
         const employee = employees.find((entry) => entry.id === id);
         if (!employee) return;
-        setEmployees((current) => current.filter((entry) => entry.id !== id));
+        setEmployees((current) => current.filter((entry) => entry.id !== id).map((entry) => entry.manager === employee.name ? { ...entry, manager: "Olivia Chen" } : entry));
         setAttendance((current) => current.filter((entry) => entry.employeeId !== id));
         setLeaveRequests((current) => current.filter((entry) => entry.employeeId !== id));
         setPayrollRecords((current) => current.filter((entry) => entry.employeeId !== id));
@@ -109,6 +110,9 @@ export const AppProvider = ({ children }) => {
         if (values.startDate > values.endDate) return { error: "The end date must be on or after the start date." };
         const days = Number(values.days);
         if (!Number.isFinite(days) || days < 1) return { error: "Enter at least one working day." };
+        const bucket = values.type === "Sick" ? "sick" : values.type === "Personal" ? "personal" : "annual";
+        const reservedDays = leaveRequests.filter((request) => request.employeeId === values.employeeId && request.type === values.type && request.status === "Pending").reduce((sum, request) => sum + request.days, 0);
+        if (employee.leave[bucket] - reservedDays < days) return { error: `Only ${Math.max(employee.leave[bucket] - reservedDays, 0)} ${values.type.toLowerCase()} days are available after pending requests.` };
         const overlaps = leaveRequests.some((request) => request.employeeId === values.employeeId
             && request.status !== "Declined"
             && values.startDate <= request.endDate
@@ -187,3 +191,7 @@ export const AppProvider = ({ children }) => {
 
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
+
+
+
+
