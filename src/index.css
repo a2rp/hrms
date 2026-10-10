@@ -38,6 +38,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+
+    @media (prefers-reduced-motion: reduce) {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
 html {
@@ -46,6 +52,10 @@ html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+
+    @media (prefers-reduced-motion: reduce) {
+        scroll-behavior: auto !important;
+    }
 }
 
 body {
@@ -143,18 +153,4 @@ table {
 
 [hidden] {
     display: none !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto !important;
-    }
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
 }
