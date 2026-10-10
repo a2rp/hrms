@@ -1,4 +1,5 @@
-﻿.container {
+﻿@keyframes enter { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+.container {
     position: fixed;
     z-index: 120;
     top: 88px;
@@ -45,10 +46,6 @@
         &.info > svg { color: #87633c; }
     }
 
-    @keyframes enter {
-        from { opacity: 0; transform: translateY(-5px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
 
     @media (max-width: 48rem) {
         top: 76px;
@@ -60,3 +57,4 @@
         .toast { animation: none; }
     }
 }
+
