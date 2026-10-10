@@ -50,17 +50,6 @@
     .reviewed { color: #9b9298; font-size: 13px; white-space: nowrap; }
     .footnote { padding: 12px 20px; border-top: 1px solid #eee8e2; color: #8c8289; background: #fcfaf7; font-size: 13px; }
     .empty { display: grid; min-height: 220px; align-content: center; justify-items: center; color: #887d85; text-align: center; svg { margin-bottom: 8px; color: #8f6b80; font-size: 24px; } strong { color: #4b4048; font-size: 16px; } p { margin-top: 3px; font-size: 14px; } button { min-height: 36px; margin-top: 11px; padding: 0 10px; border: 1px solid #e6d8e0; border-radius: 8px; color: var(--color-primary); background: white; font-size: 14px; font-weight: 650; &:hover { border-color: #b99eac; background: #faf5f7; } } }
-    .requestForm { display: grid; gap: 13px; }
-    .requestForm label { display: grid; gap: 5px; color: #5d525a; font-size: 14px; font-weight: 650; }
-    .requestForm input, .requestForm select, .requestForm textarea { width: 100%; min-height: 42px; padding: 8px 10px; border: 1px solid var(--color-border); border-radius: 9px; color: #40363e; background: white; font-size: 14px; &:focus { border-color: #b790a3; outline: 3px solid rgb(105 66 87 / 10%); } }
-    .dateFields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
-    .balancePreview { display: flex; align-items: center; gap: 10px; padding: 10px; border: 1px solid #e9dfe4; border-radius: 11px; color: var(--color-primary); background: #faf5f7; svg { font-size: 18px; } span { display: grid; gap: 2px; } strong { color: #51404b; font-size: 14px; } small { color: #877982; font-size: 13px; } }
-    .formWarning, .formError { color: #946b36; font-size: 13px; }
-    .formError { color: #a4474c; }
-    .formActions { display: flex; justify-content: flex-end; gap: 8px; }
-    .formActions button { min-height: 39px; padding: 0 12px; border: 1px solid var(--color-border); border-radius: 9px; color: #625760; background: white; font-size: 14px; font-weight: 650; &:hover { border-color: #b99eac; box-shadow: 0 3px 8px rgb(49 36 44 / 6%); } }
-    .formActions button:last-child { border-color: var(--color-primary); color: white; background: var(--color-primary); &:hover { border-color: var(--color-primary-dark); background: var(--color-primary-dark); } &:disabled { border-color: #d4c7cf; color: #897d85; background: #eee8eb; box-shadow: none; } }
-
     @media (max-width: 76rem) {
         .balanceList { grid-template-columns: minmax(0, 1fr); }
         .requestRow { grid-template-columns: 38px minmax(120px, 1.1fr) minmax(80px, .7fr) minmax(140px, 1fr) minmax(100px, 1fr) 77px auto; gap: 7px; padding-right: 12px; padding-left: 12px; }
@@ -99,4 +88,17 @@
         .actions button { width: 34px; height: 34px; justify-content: center; }
         .footnote { padding: 11px 13px; line-height: 1.5; }
     }
+}
+
+.requestForm {
+    display: grid;
+    gap: 13px;
+
+    label { display: grid; gap: 5px; color: #5d525a; font-size: 14px; font-weight: 650; }
+    input, select, textarea { width: 100%; min-height: 42px; padding: 8px 10px; border: 1px solid var(--color-border); border-radius: 9px; color: #40363e; background: white; font-size: 14px; &:focus { border-color: #b790a3; outline: 3px solid rgb(105 66 87 / 10%); } }
+    .dateFields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+    .balancePreview { display: flex; align-items: center; gap: 10px; padding: 10px; border: 1px solid #e9dfe4; border-radius: 11px; color: var(--color-primary); background: #faf5f7; svg { font-size: 18px; } span { display: grid; gap: 2px; } strong { color: #51404b; font-size: 14px; } small { color: #877982; font-size: 13px; } }
+    .formWarning, .formError { color: #946b36; font-size: 13px; }
+    .formError { color: #a4474c; }
+    .formActions { display: flex; justify-content: flex-end; gap: 8px; button { min-height: 39px; padding: 0 12px; border: 1px solid var(--color-border); border-radius: 9px; color: #625760; background: white; font-size: 14px; font-weight: 650; &:hover { border-color: #b99eac; box-shadow: 0 3px 8px rgb(49 36 44 / 6%); } } button:last-child { border-color: var(--color-primary); color: white; background: var(--color-primary); &:hover { border-color: var(--color-primary-dark); background: var(--color-primary-dark); } &:disabled { border-color: #d4c7cf; color: #897d85; background: #eee8eb; box-shadow: none; } } }
 }
