@@ -1,31 +1,41 @@
-﻿.setup {
-    width: min(100% - 40px, 760px);
+﻿.shell {
     min-height: 100vh;
-    display: grid;
-    align-content: center;
-    gap: 18px;
-    margin-inline: auto;
-}
 
-.brand {
-    color: var(--color-primary);
-    font-size: 18px;
-    font-weight: 800;
-}
+    .skipLink {
+        position: fixed;
+        z-index: 200;
+        top: 9px;
+        left: 9px;
+        padding: 9px 12px;
+        border: 1px solid var(--color-primary);
+        border-radius: 9px;
+        color: white;
+        background: var(--color-primary-dark);
+        font-size: 14px;
+        font-weight: 650;
+        transform: translateY(-150%);
+        transition: transform 160ms ease;
 
-.brand span {
-    color: var(--color-accent);
-}
+        &:focus { transform: translateY(0); }
+    }
 
-.setup h1 {
-    max-width: 620px;
-    font-size: clamp(36px, 7vw, 62px);
-    font-weight: 700;
-    letter-spacing: -0.05em;
-    line-height: 1.04;
-}
+    .workspace {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        margin-left: 264px;
 
-.copy {
-    color: var(--color-muted);
-    font-size: 18px;
+        .main {
+            width: 100%;
+            min-height: calc(100vh - 76px);
+            flex: 1 0 auto;
+            padding: 104px clamp(20px, 3.4vw, 48px) 42px;
+            outline: 0;
+        }
+    }
+
+    @media (max-width: 48rem) {
+        .workspace { margin-left: 0; }
+        .workspace .main { min-height: calc(100vh - 68px); padding: 88px 15px 31px; }
+    }
 }
