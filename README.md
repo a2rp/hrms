@@ -117,7 +117,7 @@ Vite prints the local address in the terminal. Because this app is configured fo
 | `npm run lint` | Run ESLint |
 | `npm run build` | Create the production build in `dist/` |
 | `npm run preview` | Preview the production build locally |
-| `npm run deploy` | Build, create the GitHub Pages SPA fallback, and publish `dist/` to the `gh-pages` branch |
+| `npm run deploy` | Build, create the GitHub Pages SPA fallback, skip Jekyll processing, and publish `dist/` to the `gh-pages` branch |
 
 The deploy command requires Git access to the repository and publishes the existing build to GitHub Pages. The repository is configured to serve at [https://a2rp.github.io/hrms/](https://a2rp.github.io/hrms/).
 

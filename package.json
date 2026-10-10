@@ -9,7 +9,7 @@
         "build": "vite build",
         "lint": "eslint .",
         "preview": "vite preview",
-        "deploy": "npm run build && node -e \"require('node:fs').copyFileSync('dist/index.html', 'dist/404.html')\" && gh-pages -d dist"
+        "deploy": "npm run build && node -e \"require('node:fs').copyFileSync('dist/index.html', 'dist/404.html')\" && gh-pages -d dist --nojekyll"
     },
     "dependencies": {
         "overlayscrollbars": "^2.16.0",
