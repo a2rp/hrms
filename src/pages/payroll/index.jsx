@@ -1,5 +1,5 @@
 ﻿import { useMemo, useState } from "react";
-import { FiArrowUpRight, FiCheck, FiDownload, FiEye, FiFlag, FiRefreshCw, FiWallet } from "react-icons/fi";
+import { FiArrowUpRight, FiCheck, FiDownload, FiEye, FiFlag, FiRefreshCw, FiCreditCard } from "react-icons/fi";
 import EmployeeAvatar from "../../components/employeeAvatar/index.jsx";
 import EmployeeProfile from "../../components/employeeProfile/index.jsx";
 import useApp from "../../context/useApp.js";
@@ -12,7 +12,7 @@ const PayStatement = ({ employee, record, period, gross, deductions, net }) => {
     return <div className={styles.statement}>
         <div className={styles.statementPerson}><EmployeeAvatar name={employee.name} initials={employee.initials} color={employee.color} size="large" /><div><strong>{employee.name}</strong><span>{employee.role} · {employee.department}</span><small>{formatPeriod(period)} · Demo statement</small></div></div>
         <div className={styles.statementRows}><div><span>Annual salary</span><strong>{formatCurrency(employee.salary)}</strong></div><div><span>Base monthly pay</span><strong>{formatCurrency(employee.salary / 12)}</strong></div><div><span>Additional bonus</span><strong>{formatCurrency(record.bonus || 0)}</strong></div><div><span>Gross estimate</span><strong>{formatCurrency(gross)}</strong></div><div><span>Estimated deductions</span><strong>−{formatCurrency(deductions)}</strong></div><div className={styles.net}><span>Estimated take home</span><strong>{formatCurrency(net)}</strong></div></div>
-        <div className={styles.statementNote}><FiWallet aria-hidden="true" /><p>This is a planning preview only. Morrow does not submit payroll or transfer money.</p></div>
+        <div className={styles.statementNote}><FiCreditCard aria-hidden="true" /><p>This is a planning preview only. Morrow does not submit payroll or transfer money.</p></div>
         <div className={styles.statementActions}><button type="button" onClick={() => openModal({ title: "A little more about them", description: "Update their work record and annual salary.", content: <EmployeeProfile employee={employee} /> })}><FiArrowUpRight aria-hidden="true" /> Edit people record</button><button type="button" onClick={closeModal}>Close</button></div>
     </div>;
 };
@@ -70,11 +70,12 @@ const Payroll = () => {
                 <strong className={styles.money}>{formatCurrency(entry.employee.salary / 12)}</strong><span className={styles.money}>{formatCurrency(entry.record.bonus || 0)}</span><span className={styles.money}>{formatCurrency(entry.deductions)}</span><strong className={`${styles.money} ${styles.net}`}>{formatCurrency(entry.net)}</strong>
                 <span className={`${styles.status} ${styles[entry.record.status.toLowerCase()]}`}><i />{entry.record.status}</span>
                 <div className={styles.actions}><button className={styles.view} type="button" onClick={() => inspect(entry)} aria-label={`View ${entry.employee.name}’s payslip`}><FiEye aria-hidden="true" /><span>Details</span></button>{entry.record.status === "Paid" ? <button className={styles.mark} type="button" onClick={() => inspect(entry)}><FiCheck aria-hidden="true" /><span>Paid</span></button> : entry.record.status === "Review" ? <button className={styles.mark} type="button" onClick={() => updateStatus(entry, "Ready")}><FiRefreshCw aria-hidden="true" /><span>Mark ready</span></button> : <><button className={styles.flag} type="button" onClick={() => updateStatus(entry, "Review")} aria-label={`Flag ${entry.employee.name}’s payroll for review`}><FiFlag aria-hidden="true" /><span>Flag</span></button><button className={styles.mark} type="button" onClick={() => updateStatus(entry, "Paid")}><FiCheck aria-hidden="true" /><span>Mark paid</span></button></>}</div>
-            </article>) : <div className={styles.empty}><FiWallet aria-hidden="true" /><strong>No payroll entries found</strong><p>Adjust the department or status filters.</p><button type="button" onClick={() => { setDepartment("All departments"); setStatusFilter("All statuses"); }}>Clear filters</button></div>}</div>
-            <div className={styles.disclaimer}><FiWallet aria-hidden="true" /><p>Frontend preview only. Pay estimates are calculated from annual salary and sample deductions. Marking a row paid changes its demo status only; no money moves.</p></div>
+            </article>) : <div className={styles.empty}><FiCreditCard aria-hidden="true" /><strong>No payroll entries found</strong><p>Adjust the department or status filters.</p><button type="button" onClick={() => { setDepartment("All departments"); setStatusFilter("All statuses"); }}>Clear filters</button></div>}</div>
+            <div className={styles.disclaimer}><FiCreditCard aria-hidden="true" /><p>Frontend preview only. Pay estimates are calculated from annual salary and sample deductions. Marking a row paid changes its demo status only; no money moves.</p></div>
         </section>
     </div>;
 };
 
 export default Payroll;
+
 
