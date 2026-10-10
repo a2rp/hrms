@@ -150,10 +150,10 @@ export const AppProvider = ({ children }) => {
         return { ok: true };
     };
 
-    const updatePayrollStatus = (employeeId, status) => {
+    const updatePayrollStatus = (employeeId, status, selectedPeriod = todayKey().slice(0, 7)) => {
         const employee = employees.find((entry) => entry.id === employeeId);
         if (!employee) return { error: "This employee is no longer in the directory." };
-        const period = todayKey().slice(0, 7);
+        const period = selectedPeriod;
         setPayrollRecords((current) => {
             const existing = current.find((entry) => entry.employeeId === employeeId && entry.period === period);
             const record = { ...existing, employeeId, period, status, bonus: existing?.bonus || 0, deductions: existing?.deductions ?? Math.round(employee.salary * 0.22 / 12), paidDate: status === "Paid" ? todayKey() : "" };
@@ -161,7 +161,7 @@ export const AppProvider = ({ children }) => {
                 ? current.map((entry) => entry === existing ? record : entry)
                 : [record, ...current];
         });
-        showToast(status === "Paid" ? `${employee.name}’s demo payroll status is marked paid. No payment was sent.` : `${employee.name}’s payroll is marked for review.`, status === "Paid" ? "success" : "info");
+        showToast(status === "Paid" ? `${employee.name}’s demo payroll is marked paid. No payment was sent.` : status === "Review" ? `${employee.name}’s payroll is flagged for review.` : `${employee.name}’s payroll is marked ready.`, status === "Paid" ? "success" : "info");
         return { ok: true };
     };
 
@@ -191,6 +191,7 @@ export const AppProvider = ({ children }) => {
 
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
+
 
 
 
