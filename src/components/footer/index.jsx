@@ -1,13 +1,12 @@
 ﻿import { Tooltip } from "react-tooltip";
 import { FiMail, FiCoffee, FiGlobe, FiHeart } from "react-icons/fi";
-import { FaFacebookF, FaGithub, FaLinkedinIn, FaPatreon, FaYoutube } from "react-icons/fa6";
-import { SiCodepen } from "react-icons/si";
+import { FaCodepen, FaFacebookF, FaGithub, FaLinkedinIn, FaPatreon, FaYoutube } from "react-icons/fa6";
 import styles from "./styles.module.css";
 
 const links = [
     { label: "Portfolio", href: "https://www.ashishranjan.net", detail: "ashishranjan.net", icon: FiGlobe },
     { label: "GitHub", href: "https://github.com/a2rp", detail: "github.com/a2rp", icon: FaGithub },
-    { label: "CodePen", href: "https://codepen.io/ash1198", detail: "codepen.io/ash1198", icon: SiCodepen },
+    { label: "CodePen", href: "https://codepen.io/ash1198", detail: "codepen.io/ash1198", icon: FaCodepen },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/aashishranjan", detail: "linkedin.com/in/aashishranjan", icon: FaLinkedinIn },
     { label: "Facebook", href: "https://www.facebook.com/theash.ashish/", detail: "facebook.com/theash.ashish", icon: FaFacebookF },
     { label: "YouTube", href: "https://www.youtube.com/@ashishranjan-ashz?sub_confirmation=1", detail: "youtube.com/@ashishranjan-ashz", icon: FaYoutube },
@@ -34,4 +33,6 @@ const Footer = () => <footer className={styles.footer}>
 </footer>;
 
 export default Footer;
+
+
 
