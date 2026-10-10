@@ -1,0 +1,10 @@
+﻿.page { display: grid; min-height: min(620px, calc(100vh - 190px)); align-content: center; justify-items: center; padding: 36px 16px; text-align: center; }
+.illustration { display: flex; align-items: center; gap: 13px; color: #775468; font-size: clamp(54px, 10vw, 90px); font-weight: 750; letter-spacing: -6px; line-height: 1; }
+.illustration i { display: grid; width: 58px; height: 58px; place-items: center; border: 1px solid #e7dce2; border-radius: 50%; color: #c58b76; background: #fbf4ee; font-size: 33px; font-style: normal; letter-spacing: 0; }
+.eyebrow { margin-top: 26px; color: #987789; font-size: 13px; font-weight: 750; letter-spacing: .12em; }
+h1 { margin-top: 6px; color: #372c34; font-size: clamp(25px, 4vw, 35px); font-weight: 740; letter-spacing: -1px; }
+.copy { max-width: 420px; margin-top: 8px; color: #7e737b; font-size: 15px; line-height: 1.6; }
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; margin-top: 21px; }
+.actions button, .actions a { display: inline-flex; min-height: 42px; align-items: center; gap: 7px; padding: 0 13px; border: 1px solid #e5d9df; border-radius: 10px; color: #604b5b; background: #fffefa; font-size: 14px; font-weight: 650; text-decoration: none; &:hover { border-color: #b99eac; background: #faf5f7; box-shadow: 0 4px 12px rgb(49 36 44 / 7%); } }
+.actions a { border-color: var(--color-primary); color: white; background: var(--color-primary); &:hover { border-color: var(--color-primary-dark); color: white; background: var(--color-primary-dark); } }
+@media (max-width: 48rem) { .page { min-height: calc(100vh - 160px); } .illustration i { width: 47px; height: 47px; font-size: 27px; } }
