@@ -47,15 +47,6 @@
     .panelFoot { display: flex; min-height: 48px; align-items: center; justify-content: space-between; gap: 12px; padding: 7px 19px; border-top: 1px solid #eee8e2; color: #90868e; background: #fcfaf7; font-size: 13px; }
     .panelFoot button { min-height: 32px; padding: 0 8px; border: 1px solid transparent; border-radius: 8px; color: var(--color-primary); background: transparent; font-size: 13px; font-weight: 650; &:hover { border-color: #eadde4; background: white; } }
 
-    .editor { display: grid; gap: 14px; }
-    .editPerson { display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #eee8e2; border-radius: 12px; background: #fcfaf7; div { display: grid; gap: 2px; } strong { color: #40353d; font-size: 14px; } span { color: #8f858c; font-size: 13px; } }
-    .editor label { display: grid; gap: 5px; color: #5d525a; font-size: 14px; font-weight: 650; }
-    .editor input, .editor select, .editor textarea { width: 100%; min-height: 42px; padding: 9px 11px; border: 1px solid var(--color-border); border-radius: 9px; background: white; font-size: 14px; &:focus { border-color: #b790a3; outline: 3px solid rgb(105 66 87 / 10%); } &:disabled { color: #9d949a; background: #f4f0f1; } }
-    .timeFields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .formActions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 3px; }
-    .formActions button { min-height: 39px; padding: 0 12px; border: 1px solid var(--color-border); border-radius: 9px; background: white; font-size: 14px; font-weight: 650; &:hover { border-color: #b99eac; box-shadow: 0 3px 8px rgb(49 36 44 / 6%); } }
-    .formActions button:last-child { border-color: var(--color-primary); color: white; background: var(--color-primary); &:hover { border-color: var(--color-primary-dark); background: var(--color-primary-dark); } }
-
     @media (max-width: 70rem) {
         .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .row { grid-template-columns: 40px minmax(150px, 1.3fr) 75px 75px minmax(105px, .8fr) 82px; gap: 8px; padding-right: 13px; padding-left: 13px; }
@@ -88,4 +79,15 @@
         .row .person span { font-size: 13px; }
         .panelFoot { padding: 7px 12px; }
     }
+}
+
+.editor {
+    display: grid;
+    gap: 14px;
+
+    .editPerson { display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid #eee8e2; border-radius: 12px; background: #fcfaf7; div { display: grid; gap: 2px; } strong { color: #40353d; font-size: 14px; } span { color: #8f858c; font-size: 13px; } }
+    label { display: grid; gap: 5px; color: #5d525a; font-size: 14px; font-weight: 650; }
+    input, select, textarea { width: 100%; min-height: 42px; padding: 9px 11px; border: 1px solid var(--color-border); border-radius: 9px; background: white; font-size: 14px; &:focus { border-color: #b790a3; outline: 3px solid rgb(105 66 87 / 10%); } &:disabled { color: #9d949a; background: #f4f0f1; } }
+    .timeFields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .formActions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 3px; button { min-height: 39px; padding: 0 12px; border: 1px solid var(--color-border); border-radius: 9px; background: white; font-size: 14px; font-weight: 650; &:hover { border-color: #b99eac; box-shadow: 0 3px 8px rgb(49 36 44 / 6%); } } button:last-child { border-color: var(--color-primary); color: white; background: var(--color-primary); &:hover { border-color: var(--color-primary-dark); background: var(--color-primary-dark); } } }
 }
