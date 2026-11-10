@@ -2,7 +2,7 @@
 import AppContext from "./context.js";
 import { attendance as seedAttendance, employees as seedEmployees, leaveRequests as seedLeaveRequests, payroll as seedPayroll, todayKey } from "../data/seedData.js";
 
-const makeId = (prefix) => `${prefix}-${Date.now().toString().slice(-6)}-${Math.random().toString(36).slice(2, 5).toUpperCase()}`;
+const makeId = (prefix) => `${prefix}-${crypto.randomUUID().toUpperCase()}`;
 
 export const AppProvider = ({ children }) => {
     const [employees, setEmployees] = useState(seedEmployees);
@@ -49,7 +49,7 @@ export const AppProvider = ({ children }) => {
             color: ["lilac", "rose", "gold", "blue", "mint", "peach", "plum", "teal", "coral"][employees.length % 9],
         };
         setEmployees((current) => [employee, ...current]);
-        setPayrollRecords((current) => [{ employeeId: employee.id, period: todayKey().slice(0, 7), status: "Ready", bonus: 0, deductions: 0, paidDate: "" }, ...current]);
+        setPayrollRecords((current) => [{ employeeId: employee.id, period: todayKey().slice(0, 7), status: "Ready", bonus: 0, deductions: Math.round(employee.salary * 0.22 / 12), paidDate: "" }, ...current]);
         showToast(`${employee.name} added to the people directory.`);
         return { ok: true, employee };
     };
@@ -67,6 +67,12 @@ export const AppProvider = ({ children }) => {
             salary: Number(values.salary),
             initials: values.name.trim().split(/\s+/).slice(0, 2).map((part) => part[0]?.toUpperCase()).join(""),
         } : employee));
+        const currentPeriod = todayKey().slice(0, 7);
+        setPayrollRecords((current) => current.map((record) => record.employeeId === id
+            && record.period === currentPeriod
+            && record.status !== "Paid"
+            ? { ...record, deductions: Math.round(Number(values.salary) * 0.22 / 12) }
+            : record));
         showToast(`${values.name.trim()}’s profile was updated.`);
         return { ok: true };
     };
@@ -74,7 +80,8 @@ export const AppProvider = ({ children }) => {
     const removeEmployee = (id) => {
         const employee = employees.find((entry) => entry.id === id);
         if (!employee) return;
-        setEmployees((current) => current.filter((entry) => entry.id !== id).map((entry) => entry.manager === employee.name ? { ...entry, manager: "Olivia Chen" } : entry));
+        const fallbackManager = employees.find((entry) => entry.id !== id && entry.status !== "Offboarding")?.name || "Unassigned";
+        setEmployees((current) => current.filter((entry) => entry.id !== id).map((entry) => entry.manager === employee.name ? { ...entry, manager: fallbackManager } : entry));
         setAttendance((current) => current.filter((entry) => entry.employeeId !== id));
         setLeaveRequests((current) => current.filter((entry) => entry.employeeId !== id));
         setPayrollRecords((current) => current.filter((entry) => entry.employeeId !== id));
@@ -86,15 +93,17 @@ export const AppProvider = ({ children }) => {
         if (!employee) return { error: "Choose an employee in the directory." };
         const date = values.date || todayKey();
         const existing = attendance.find((entry) => entry.employeeId === employeeId && entry.date === date);
+        const status = values.status || "Present";
+        const tracksTime = status !== "Not started" && status !== "On leave";
         const entry = {
             ...existing,
             ...values,
             id: existing?.id || makeId("ATT"),
             employeeId,
             date,
-            status: values.status || "Present",
-            clockIn: values.clockIn || "--:--",
-            clockOut: values.clockOut || "--:--",
+            status,
+            clockIn: tracksTime ? values.clockIn || "--:--" : "--:--",
+            clockOut: tracksTime ? values.clockOut || "--:--" : "--:--",
             note: values.note?.trim() || "",
         };
         setAttendance((current) => existing

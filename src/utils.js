@@ -25,21 +25,40 @@ export const formatPeriod = (value) => {
 
 export const countWorkingDays = (start, end) => {
     if (!start || !end || start > end) return 0;
-    const date = new Date(`${start}T12:00:00`);
-    const last = new Date(`${end}T12:00:00`);
-    let days = 0;
-    while (date <= last) {
-        const weekday = date.getDay();
-        if (weekday !== 0 && weekday !== 6) days += 1;
-        date.setDate(date.getDate() + 1);
+    const firstDate = new Date(`${start}T12:00:00`);
+    const lastDate = new Date(`${end}T12:00:00`);
+    if (Number.isNaN(firstDate.getTime()) || Number.isNaN(lastDate.getTime())) return 0;
+
+    const toUtcDay = (date) => {
+        const utcDate = new Date(0);
+        utcDate.setUTCFullYear(date.getFullYear(), date.getMonth(), date.getDate());
+        utcDate.setUTCHours(0, 0, 0, 0);
+        return utcDate.getTime();
+    };
+    const firstDay = toUtcDay(firstDate);
+    const lastDay = toUtcDay(lastDate);
+    const totalDays = Math.floor((lastDay - firstDay) / 86_400_000) + 1;
+    const fullWeeks = Math.floor(totalDays / 7);
+    const remainingDays = totalDays % 7;
+    let workingDays = fullWeeks * 5;
+
+    for (let offset = 0; offset < remainingDays; offset += 1) {
+        const weekday = (firstDate.getDay() + offset) % 7;
+        if (weekday !== 0 && weekday !== 6) workingDays += 1;
     }
-    return days;
+    return workingDays;
 };
 
 export const downloadCsv = (filename, rows) => {
     if (!rows.length) return false;
     const headers = Object.keys(rows[0]);
-    const quote = (value) => `"${String(value ?? "").replaceAll('"', '""')}"`;
+    const quote = (value) => {
+        const text = String(value ?? "");
+        const safeText = /^\s*[=+\-@]/.test(text) || /^[\u0000-\u001F]/.test(text)
+            ? `'${text}`
+            : text;
+        return `"${safeText.replaceAll('"', '""')}"`;
+    };
     const content = [headers.map(quote).join(","), ...rows.map((row) => headers.map((header) => quote(row[header])).join(","))].join("\r\n");
     const blob = new Blob(["\uFEFF", content], { type: "text/csv;charset=utf-8" });
     const address = URL.createObjectURL(blob);
@@ -49,7 +68,7 @@ export const downloadCsv = (filename, rows) => {
     document.body.append(link);
     link.click();
     link.remove();
-    URL.revokeObjectURL(address);
+    window.setTimeout(() => URL.revokeObjectURL(address), 1000);
     return true;
 };
 

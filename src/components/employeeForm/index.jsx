@@ -5,6 +5,15 @@ import styles from "./styles.module.css";
 
 const EmployeeForm = ({ employee = null }) => {
     const { employees, addEmployee, updateEmployee, closeModal } = useApp();
+    const managerNames = employees
+        .filter((person) => person.id !== employee?.id && person.status !== "Offboarding")
+        .map((person) => person.name);
+    const defaultManager = managerNames.includes("Olivia Chen") ? "Olivia Chen" : managerNames[0] || "Unassigned";
+    const managerOptions = [...new Set([
+        ...managerNames,
+        ...(employee?.manager ? [employee.manager] : []),
+        ...(!managerNames.length && !employee?.manager ? ["Unassigned"] : []),
+    ])];
     const [form, setForm] = useState(() => employee ? {
         name: employee.name,
         email: employee.email,
@@ -12,7 +21,7 @@ const EmployeeForm = ({ employee = null }) => {
         role: employee.role,
         department: employee.department,
         location: employee.location,
-        manager: employee.manager,
+        manager: managerOptions.includes(employee.manager) ? employee.manager : defaultManager,
         employmentType: employee.employmentType,
         status: employee.status,
         startDate: employee.startDate,
@@ -24,7 +33,7 @@ const EmployeeForm = ({ employee = null }) => {
         role: "",
         department: "People",
         location: "San Francisco",
-        manager: "Olivia Chen",
+        manager: defaultManager,
         employmentType: "Full time",
         status: "Active",
         startDate: todayKey(),
@@ -73,8 +82,7 @@ const EmployeeForm = ({ employee = null }) => {
                 <label className={styles.field}>
                     <span>Manager</span>
                     <select value={form.manager} onChange={(event) => field("manager", event.target.value)}>
-                        <option>Olivia Chen</option>
-                        {employees.filter((person) => person.id !== employee?.id && person.name !== "Olivia Chen").map((person) => <option key={person.id}>{person.name}</option>)}
+                        {managerOptions.map((name) => <option key={name}>{name}</option>)}
                     </select>
                 </label>
                 <label className={styles.field}>

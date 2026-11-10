@@ -26,7 +26,7 @@ Attendance, leave, and payroll values are demonstrations. Leave working-day calc
 
 ## Screenshots
 
-Screenshots below were captured from the running production build with representative sample data.
+These static screenshots illustrate the app’s routes and dialog states with representative sample data.
 
 ### Pages
 
