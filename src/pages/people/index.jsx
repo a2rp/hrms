@@ -56,7 +56,7 @@ const People = () => {
                 <button className={styles.add} type="button" onClick={addPerson}><FiPlus aria-hidden="true" /> Add person</button>
             </div>
             <div className={styles.listSummary}><span><strong>{visible.length}</strong> of {employees.length} colleagues</span><span className={styles.sortHint}>Currently sorted by <button type="button" onClick={() => toggleSort(sort)}>{sort === "startDate" ? "start date" : sort} <SortIcon aria-hidden="true" /></button></span></div>
-            <div className={styles.tableHead} aria-hidden="true"><button type="button" onClick={() => toggleSort("name")}>COLLEAGUE <SortIcon aria-hidden="true" /></button><button type="button" onClick={() => toggleSort("role")}>ROLE <SortIcon aria-hidden="true" /></button><span>DEPARTMENT</span><span>LOCATION</span><span>STATUS</span><span>PROFILE</span></div>
+            <div className={styles.tableHead}><button type="button" onClick={() => toggleSort("name")}>COLLEAGUE <SortIcon aria-hidden="true" /></button><button type="button" onClick={() => toggleSort("role")}>ROLE <SortIcon aria-hidden="true" /></button><span>DEPARTMENT</span><span>LOCATION</span><span>STATUS</span><span>PROFILE</span></div>
             {visible.length ? <div className={styles.peopleList}>{visible.map((person) => <article className={styles.person} key={person.id}>
                 <div className={styles.identity}><EmployeeAvatar name={person.name} initials={person.initials} color={person.color} /><span><strong>{person.name}</strong><small>{person.email}</small></span></div>
                 <div className={styles.role}><strong>{person.role}</strong><small>{person.employmentType}</small></div>

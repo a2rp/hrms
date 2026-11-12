@@ -54,7 +54,9 @@ export const downloadCsv = (filename, rows) => {
     const headers = Object.keys(rows[0]);
     const quote = (value) => {
         const text = String(value ?? "");
-        const safeText = /^\s*[=+\-@]/.test(text) || /^[\u0000-\u001F]/.test(text)
+        const startsWithFormula = /^\s*[=+\-@]/.test(text);
+        const startsWithControl = text.length > 0 && text.charCodeAt(0) <= 0x1f;
+        const safeText = startsWithFormula || startsWithControl
             ? `'${text}`
             : text;
         return `"${safeText.replaceAll('"', '""')}"`;
